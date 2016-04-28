@@ -1,0 +1,99 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <title>Работа с узлами DOM</title>
+    <script type="text/javascript">
+
+        var node = null;
+
+        function reset(){
+            var lists = document.getElementsByTagName("li");
+            for (var i = 0; i < lists.length; i++) {
+                lists[i].setAttribute("style", "color:black");
+            }
+        }
+
+        function getFirstElement(){
+            reset();
+            var items = document.getElementById("items");
+            var firstItem = items.firstChild;
+            if(firstItem!=null){
+                firstItem.style.color="red";
+            }
+        }
+
+        function getLastElement(){
+            reset();
+            var items = document.getElementById("items");
+            var firstItem = items.lastChild;
+            if(firstItem!=null){
+                firstItem.style.color="red";
+            }
+        }
+
+        function getNextElement(){
+            reset();
+            if(node == null){
+                var lists = document.getElementById("items");
+                node= lists.firstChild;
+                node.setAttribute("style", "color:red");
+                return;
+            }
+            node = node.nextSibling;
+            if (node != null) {
+                node.setAttribute("style", "color:red");
+            }
+        }
+        function getPrevElement(){
+            reset();
+            if(node == null){
+                var lists = document.getElementById("items");
+                node= lists.lastChild;
+                node.setAttribute("style", "color:red");
+                return;
+            }
+            node = node.previousSibling;
+            if (node != null) {
+                node.setAttribute("style", "color:red");
+            }
+        }
+
+        function addElement(){
+            var element = document.createElement("li");
+            element.innerHTML="New Item";
+            var lists = document.getElementById("items");
+            lists.appendChild(element);
+        }
+
+        function removeElement(){
+            var lists = document.getElementById("items");
+            var last = lists.lastChild;
+            if(last!=null) {
+                lists.removeChild(last);
+            }
+        }
+
+        function addToStart(){
+            var element = document.createElement("li");
+            element.innerHTML="New Item";
+            var lists = document.getElementById("items");
+            if(lists.firstChild!=null) {
+                lists.insertBefore(element, lists.firstChild);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<ul id="items"><li>Item1</li><li>Item2</li><li>Item3</li><li>Item4</li><li>Item5</li><li>Item6</li><li>Item7</li><li>Item8</li></ul>
+<div class="buton-set">
+    <button onclick="getFirstElement()">Get First Element</button>
+    <button onclick="getLastElement()">Get Last Element</button>
+    <button onclick="getNextElement()">Get Next Element</button>
+    <button onclick="getPrevElement()">Get Prev Element</button>
+    <button onclick="addElement()">Add Element</button>
+    <button onclick="removeElement()">Remove Element</button>
+    <button onclick="addToStart()">Add to start</button>
+</div>
+</body>
+</html>
